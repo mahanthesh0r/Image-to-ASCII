@@ -29,7 +29,8 @@ resizeImage width img = scale Bilinear Edge (scaleFactor, scaleFactor) img
         currentWidth = I.cols img
         scaleFactor = fromIntegral width / fromIntegral currentWidth :: Double
 
--- Converts a pixel to an ASCII character
+-- | Converts a pixel in the RGB color space to a single ASCII character
+-- based on its luminance value.
 replacePixel :: Pixel RGB Double -> String
 replacePixel (PixelRGB r g b) = character
     where
@@ -39,6 +40,9 @@ replacePixel (PixelRGB r g b) = character
         i = floor $ (0.2126 * red + 0.7152 * green + 0.0722 * blue) * brightnessWeight :: Int
         character = [asciiCharactersMap !! i]
 
+-- This takes an image and a configuration, converting the image to ASCII art.
+-- It operates by first converting the image to a list of pixels, replacing each pixel with its corresponding ASCII character, and inserting line breaks according to the image width specified in the configuration.
+-- Finally, it returns the ASCII representation of the image as a string.
 convertToAscii :: Image VS RGB Double -> Config -> IO String
 convertToAscii img config = do
     let pixelsVector = toVector img
