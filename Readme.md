@@ -22,7 +22,12 @@ Requires Haskell instead and running. For MacOS or Linux you can run the below c
  ` curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | sh `
  
 Make sure you're inside the image-to-text directory 
+
+- The haskell project was created using the ` stack new <project-name> ` command
+- All the code for the Image to ASCII can be found inside the `src/AsciiConverter/Lib.hs `
+
 ```
+cd image-to-text
 stack build
 stack exec image-to-text-exe
 ```
